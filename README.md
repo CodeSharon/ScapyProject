@@ -19,4 +19,15 @@
 - python3 manage.py createsuperuser
 
 ## Lancement du serveur django (en root)
+
 - python3 manage.py runserver
+
+## Utilisation
+
+1. Authentification en tant qu'analyseur
+
+- Sur la page login "http://localhost:8000/analyzer/login", vous pouvez directement créer un utilisateur en saisissant un <nom utilisateur> et un <mot de passe> afin de faire des demandes.
+
+2. Authentification en tant qu'expert
+
+- S'authentifier avec les credentials du superuser pour avoir accès aux demandes de captures.
