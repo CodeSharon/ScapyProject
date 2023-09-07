@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Etat de la demande</title>
+</head>
+<body>
+    {% if existing_capture %}
+        <h2>En cours.....</h2>
+    {% else %}
+        <h2>Votre demande de capture a été soumise avec succès!</h2>
+        <p>Nom de la demande: {{ capture_request.nom_demande }}</p>
+        <p>Interface sélectionnée: {{ capture_request.selected_interface }}</p>
+        <p>Count: {{ capture_request.count }}</p>
+        <p>Filtre: {{ capture_request.filter }}</p>
+    {% endif %}
+    <a href="{% url 'request_form' %}">Retour au formulaire</a>
+</body>
+</html>

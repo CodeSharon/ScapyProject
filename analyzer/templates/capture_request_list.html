@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des Demandes de Capture</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        form {
+            display: inline-block;
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>Liste des Demandes de Capture</h2>
+    <ul>
+        {% for capture in captures %}
+            <li>
+                Nom de la demande: {{ capture.nom_demande }}
+                Interface sélectionnée: {{ capture.selected_interface }}
+                Count: {{ capture.count }}
+                Filtre: {{ capture.filter }}
+                {% if capture.is_running %}
+                État: <b>En cours.....</b> 
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" formaction="{% url 'stop_capture' capture.id %}">Arrêter la capture</button>
+                </form>
+                {% else %}
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="capture_id" value="{{ capture.id }}">
+                        <button type="submit" formaction="{% url 'start_capture' %}">Lancer la capture</button>
+                        <button type="submit" formaction="{% url 'delete_capture' capture.id %}">Supprimer</button>
+                    </form>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
